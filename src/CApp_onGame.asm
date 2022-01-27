@@ -8,6 +8,8 @@ CApp_onGame proc
 
         .while id_state {} STATE_EXIT
         
+                invoke TimerStart
+        
                 invoke game_on_loop
                 
                 invoke game_on_render
@@ -16,6 +18,7 @@ CApp_onGame proc
                 
                 invoke game_update_state
         
+                invoke TimerDelay
         .endw
 
         ret
