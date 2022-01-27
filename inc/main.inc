@@ -1,0 +1,10 @@
+IFNDEF MAIN_INC
+MAIN_INC EQU MAIN_INC
+include congame.inc
+
+includelib congame.lib
+
+
+
+
+ENDIF

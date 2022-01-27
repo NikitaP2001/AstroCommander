@@ -1,5 +1,5 @@
 SHELL=cmd.exe
-TARGET = GalacticMail
+TARGET = GalacticMail.exe
 
 SRC_DIR = src
 OBJ_DIR = obj
@@ -11,7 +11,7 @@ vpath %.inc INC_DIR
 vpath %.obj OBJ_DIR
 
 CFLAGS = /c /Cp /I \src\ConGameLib\inc /I $(INC_DIR)
-LDFLAGS = /ENTRY:main SUBSYSTEM:CONSOLE
+LDFLAGS = /ENTRY:main /SUBSYSTEM:CONSOLE
 LDLIBS = /LIBPATH:\src\ConGameLib\lib
 
 CC=\masm32\bin\ml64.exe
