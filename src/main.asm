@@ -5,8 +5,9 @@ include CApp.inc
 
 .code
 
-main proc
-        sub rsp, 30h
+main proc        
+        sub rsp, 8h
+        and rsp, -16
         
         invoke CApp_onExecute
         

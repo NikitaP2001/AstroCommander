@@ -5,7 +5,7 @@ include CApp_onInit.inc
 
 CApp_onInit proc
 LOCAL   dwStatus
-        sub rsp, 30h
+        sub rsp, 28h
         
         mov  dwStatus, 1
 

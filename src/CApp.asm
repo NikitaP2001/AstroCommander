@@ -13,8 +13,9 @@ next_state      DWORD STATE_NULL
 .code
 
 CApp_onExecute proc
-LOCAL dwStatus:DWORD
-        sub rsp, 30h
+LOCAL dwStatus:DWORD        
+        sub rsp, 28h
+        and rsp, -16
         
         mov dwStatus, STATE_NULL
         
@@ -23,6 +24,9 @@ LOCAL dwStatus:DWORD
         
                 invoke MessageBoxA,0,"CApp_onExecute: onInit error", \
                 "Error occured",MB_OK+MB_ICONERROR
+                xor eax, eax
+                dec eax
+                mov dwStatus, eax
                 jmp @end
                 
         .endif
