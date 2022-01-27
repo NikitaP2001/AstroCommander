@@ -1,14 +1,17 @@
 include main.inc
 include CApp.inc
 include CApp_onInit.inc
+include CApp_onStart.inc
+include CApp_onGame.inc
+include CApp_OnQuit.inc
 
 .const
 
 
 .data
 
-id_state        DWORD STATE_NULL
-next_state      DWORD STATE_NULL
+id_state        dd STATE_NULL
+next_state      dd STATE_NULL
 
 .code
 
@@ -31,7 +34,11 @@ LOCAL dwStatus:DWORD
                 
         .endif
         
+        invoke CApp_onStart
         
+        invoke CApp_onGame
+        
+        invoke CApp_OnQuit
 
 @end:
         mov eax, dwStatus

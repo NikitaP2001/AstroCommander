@@ -12,4 +12,7 @@ STATE_ROOM_THIRD        equ     4
 STATE_ROOM_COMPLETED    equ     5
 STATE_EXIT              equ     6
 
+EXTERNDEF id_state:DWORD
+EXTERNDEF next_state:DWORD
+
 ENDIF

@@ -1,5 +1,5 @@
 include CApp_onInit.inc
-
+include CApp.inc
 
 .code
 
