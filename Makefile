@@ -1,5 +1,5 @@
 SHELL=cmd.exe
-TARGET = GalacticMail.exe
+TARGET = AstroCommander.exe
 
 SRC_DIR = src
 OBJ_DIR = obj
