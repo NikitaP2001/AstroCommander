@@ -1,6 +1,7 @@
 include main.inc
 include CApp_onGame.inc
 include CApp.inc
+include timer.inc
 
 .code
 CApp_onGame proc
@@ -39,19 +40,28 @@ game_on_event proc
         ret
 game_on_event endp
 
-game_update_state proc
+; Process updating id_state to next_state
+game_update_state proc uses rbx
 
         .if next_state {} STATE_NULL
         
                 .switch next_state
                         .case STATE_TITLE
-                                ret                                
-                        .case 2
-                                ret                                
-                        .default
-                                ret
+                                
+                        .case STATE_ROOM_FIRST
+                                
+                        .case STATE_ROOM_SECOND
+                                
+                        .case STATE_ROOM_THIRD
+                                
+                        .case STATE_ROOM_COMPLETED
+                                                             
                 .endsw
-        
+                
+                mov ebx, next_state
+                mov id_state, ebx
+                
+                mov next_state, NULL
         .endif
         
         ret
