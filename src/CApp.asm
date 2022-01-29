@@ -13,6 +13,8 @@ include CApp_OnQuit.inc
 id_state        dd STATE_NULL
 next_state      dd STATE_NULL
 
+szGameTitle     db "AstroCommander", 0
+
 .code
 
 CApp_onExecute proc

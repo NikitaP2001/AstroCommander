@@ -1,6 +1,8 @@
 IFNDEF CAPP_INC
 CAPP_INC EQU CAPP_INC
 
+EXTERNDEF       szGameTitle:BYTE
+
 CApp_onExecute  PROTO
 
 ; game states
@@ -14,5 +16,6 @@ STATE_EXIT              equ     6
 
 EXTERNDEF id_state:DWORD
 EXTERNDEF next_state:DWORD
+
 
 ENDIF

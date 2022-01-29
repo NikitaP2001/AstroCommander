@@ -1,3 +1,4 @@
+include main.inc
 include CApp_onInit.inc
 include CApp.inc
 
@@ -5,10 +6,10 @@ include CApp.inc
 
 CApp_onInit proc
 LOCAL   dwStatus
-        sub rsp, 28h
-        
+        sub rsp, 28h        
         mov  dwStatus, 1
-
+        
+        invoke SetConsoleTitle,addr szGameTitle
         
         mov eax, dwStatus
         ret
