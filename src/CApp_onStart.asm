@@ -5,11 +5,10 @@ include CApp.inc
 
 CApp_onStart proc
 
-        mov id_state, STATE_ROOM_FIRST
-        
-        
+	mov id_state, STATE_ROOM_FIRST
+	
 
-        ret
+	ret
 CApp_onStart endp
 
 

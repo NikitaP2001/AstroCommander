@@ -17,5 +17,4 @@ STATE_EXIT              equ     6
 EXTERNDEF id_state:DWORD
 EXTERNDEF next_state:DWORD
 
-
 ENDIF
