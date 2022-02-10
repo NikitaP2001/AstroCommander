@@ -14,6 +14,8 @@ hWnd			dd 0
 hInstance		dd 0
 window			dd 0
 screen			dd 0
+screenBmp		dd 0
+bmpOld			dd 0
 
 id_state        dd STATE_NULL
 next_state      dd STATE_NULL

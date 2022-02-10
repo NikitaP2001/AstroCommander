@@ -6,6 +6,8 @@ EXTERNDEF		hWnd:DWORD
 EXTERNDEF 		hInstance:DWORD
 EXTERNDEF 		window:DWORD
 EXTERNDEF		screen:DWORD
+EXTERNDEF 		screenBmp:DWORD
+EXTERNDEF 		bmpOld:DWORD
 
 CApp_onExecute  PROTO
 
