@@ -1,0 +1,11 @@
+IFNDEF TIME_INC
+TIME_INC EQU TIME_INC
+
+
+TimerStart     PROTO
+
+TimerDelay      PROTO
+
+
+
+ENDIF

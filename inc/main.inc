@@ -1,6 +1,8 @@
 IFNDEF MAIN_INC
 MAIN_INC EQU MAIN_INC
 
+DEBUG EQU DEBUG
+
 include congame.inc
 
 includelib congame.lib

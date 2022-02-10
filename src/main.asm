@@ -7,7 +7,9 @@ include CApp.inc
 
 main proc        
 	sub rsp, 8h
-	and rsp, -16
+	and rsp, -10h
+	
+	invoke HideConsole
 	
 	invoke CApp_onExecute
 	

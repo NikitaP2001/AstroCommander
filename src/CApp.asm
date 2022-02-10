@@ -20,15 +20,16 @@ szGameTitle     db "AstroCommander", 0
 CApp_onExecute proc
 LOCAL dwStatus:DWORD 
 	sub rsp, 28h
-	and rsp, -16
+	and rsp, -10h
 	
 	mov dwStatus, STATE_NULL
 	
 	invoke CApp_onInit
 	.if eax == 0
-	
+		ifdef DEBUG
 		invoke MessageBoxA,0,"CApp_onExecute: onInit error", \
 		"Error occured",MB_OK+MB_ICONERROR
+		endif
 		xor eax, eax
 		dec eax
 		mov dwStatus, eax
