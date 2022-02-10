@@ -1,5 +1,5 @@
 SHELL=cmd.exe
-TARGET = AstroCommander.exe
+TARGET = AstroCom.exe
 
 SRC_DIR = src
 RES_DIR = res

@@ -10,6 +10,11 @@ include CApp_OnQuit.inc
 
 .data
 
+hWnd			dd 0
+hInstance		dd 0
+window			dd 0
+screen			dd 0
+
 id_state        dd STATE_NULL
 next_state      dd STATE_NULL
 
@@ -26,15 +31,10 @@ LOCAL dwStatus:DWORD
 	
 	invoke CApp_onInit
 	.if eax == 0
-		ifdef DEBUG
-		invoke MessageBoxA,0,"CApp_onExecute: onInit error", \
-		"Error occured",MB_OK+MB_ICONERROR
-		endif
 		xor eax, eax
 		dec eax
 		mov dwStatus, eax
-		jmp @end
-			
+		jmp @end			
 	.endif
 	
 	invoke CApp_onStart
