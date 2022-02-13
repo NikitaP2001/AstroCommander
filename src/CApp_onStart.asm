@@ -1,3 +1,4 @@
+include main.inc
 include CApp_onStart.inc
 include CApp.inc
 

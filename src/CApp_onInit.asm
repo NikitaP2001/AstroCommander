@@ -9,7 +9,7 @@ LOCAL   dwStatus:DWORD
 LOCAL	XScreen:DWORD
 LOCAL	YScreen:DWORD
 	sub rsp, 28h    
-	and rsp, -16
+	and rsp, -10h
 	mov  dwStatus, 1
 		
 	invoke GetSystemMetrics,SM_CXSCREEN
@@ -30,44 +30,48 @@ LOCAL	YScreen:DWORD
 	.endif	
 	
 	invoke GetModuleHandle,NULL
-	mov hInstance, eax
-	.if eax == NULL
+	mov HANDLE ptr hInstance, rax
+	.if rax == NULL
 		SHOW_ERROR "GetModuleHandle"	
 		mov dwStatus, eax
 	.endif
 	
 	invoke GetConsoleWindow
-	.if eax == NULL
+	.if rax == NULL
 		SHOW_ERROR "GetConsoleWindow"	
 		mov dwStatus, eax
 	.endif
-	mov hWnd, eax
+	mov HANDLE ptr hWnd, rax
 		
-	invoke GetDC,eax
-	.if eax == NULL
+	invoke GetDC,rax
+	.if rax == NULL
 		SHOW_ERROR "GetDC"	
 		mov dwStatus, eax
 	.endif
-	mov window, eax
+	mov HDC ptr window, rax
 	
 	; Create virual window
-	invoke CreateCompatibleDC	
-	mov screen,eax
-	invoke CreateCompatibleBitmap,dword ptr window,XScreen,YScreen
-	.if eax == NULL
+	invoke CreateCompatibleDC, rax
+	mov HDC ptr screen,rax
+	
+	invoke CreateCompatibleBitmap,qword ptr window,XScreen,YScreen
+	.if rax == NULL
 		SHOW_ERROR "CreateCompatibleBitmap"	
 		mov dwStatus, eax
 	.endif
-	mov screenBmp, eax
-	invoke SelectObject,dword ptr screen,eax
-	mov bmpOld, eax
+	mov screenBmp, rax
+	invoke SelectObject,qword ptr screen,rax
+	mov bmpOld, rax
+	
+	invoke cimg_load_bmp,qword ptr hInstance,IDI_BACKGROUND
+	mov hBackground, rax
+	.if rax == 0
+		mov dwStatus, 0
+	.endif		
 	
 	mov eax, dwStatus
 	ret
 CApp_onInit endp
-
-
-
 
 
 END

@@ -32,8 +32,18 @@ game_on_loop proc
 game_on_loop endp
 
 game_on_render proc
+	push rbp
+	mov rbp, rsp
+	sub rsp, 128h
+	and rsp, -10h
+	
+	invoke cimg_draw_bmp,qword ptr hBackground,qword ptr screen, \
+	0,0,dword ptr room_width,dword ptr room_height
+	
+	invoke BitBlt,qword ptr window,0,0,dword ptr room_width, \
+	dword ptr room_height,qword ptr screen,0,0,SRCCOPY
 
-
+	leave
 	ret
 game_on_render endp
 

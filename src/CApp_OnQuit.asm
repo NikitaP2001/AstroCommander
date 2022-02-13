@@ -5,14 +5,19 @@ include CApp.inc
 .code
 
 CApp_OnQuit proc
+	sub rsp, 28h
+
+	invoke DeleteObject,qword ptr hBackground
 
 	; Release virtual window
-	invoke SelectObject,dword ptr screen,dword ptr bmpOld
-	invoke DeleteDC,dword ptr screen
-	invoke DeleteObject,dword ptr screenBmp
+	invoke SelectObject,qword ptr screen,qword ptr bmpOld
+	invoke DeleteDC,qword ptr screen
+	invoke DeleteObject,qword ptr screenBmp
 	
-	invoke ReleaseDC,dword ptr hWnd,dword ptr window
+	invoke ReleaseDC,qword ptr hWnd,qword ptr window
 
+	add rsp, 28h
+	ret
 CApp_OnQuit endp
 
 
