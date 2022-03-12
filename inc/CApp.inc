@@ -3,14 +3,14 @@ CAPP_INC EQU CAPP_INC
 
 EXTERNDEF       szGameTitle:BYTE
 
-EXTERNDEF		hWnd:HANDLE  
-EXTERNDEF 		hInstance:HANDLE
-EXTERNDEF 		window:HDC 
-EXTERNDEF		screen:HDC
-EXTERNDEF 		screenBmp:HDC
+EXTERNDEF		hWnd:HANDLE  		; console window handle
+EXTERNDEF 		hInstance:HANDLE	; module handle
+EXTERNDEF 		window:HDC 			; console window device context
+EXTERNDEF		screen:HDC			; virtual screen device context
+EXTERNDEF 		screenBmp:HDC		
 EXTERNDEF 		bmpOld:HDC
 
-EXTERNDEF		hBackground:HDC
+EXTERNDEF		hBackground:HDC		; bachground bitmap handle
 
 CApp_onExecute  PROTO
 
@@ -36,7 +36,7 @@ WINDOW_HEIGHT			equ		40
 EXTERNDEF id_state:DWORD
 EXTERNDEF next_state:DWORD
 
-cimg_load_bmp PROTO hInst:QWORD, idBmp:DWORD
+cimg_load_bmp PROTO hInst:QWORD, idBmp:DWORD, img_w:DWORD, img_h:DWORD
 
 cimg_draw_bmp PROTO hBmp:HDC,hScreen:HDC,x:DWORD,y:DWORD,w:DWORD,h:DWORD
 

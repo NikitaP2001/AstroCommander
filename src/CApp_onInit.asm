@@ -8,9 +8,11 @@ CApp_onInit proc
 LOCAL   dwStatus:DWORD
 LOCAL	XScreen:DWORD
 LOCAL	YScreen:DWORD
+LOCAL 	wndExtsz[8]:BYTE
+
 	sub rsp, 28h    
 	and rsp, -10h
-	mov  dwStatus, 1
+	mov  dwStatus, 1	
 		
 	invoke GetSystemMetrics,SM_CXSCREEN
 	mov XScreen, eax
@@ -21,13 +23,19 @@ LOCAL	YScreen:DWORD
 	
 	invoke SetConsoleCursorState, 0
 	
-	invoke SetConsoleSize,WINDOW_WIDTH,WINDOW_HEIGHT
+	invoke SetConsoleSize,WINDOW_WIDTH,WINDOW_HEIGHT	
+	
+	; Get console window size
+	invoke GetConsoleWindowSize,WINDOW_WIDTH,WINDOW_HEIGHT
+	mov room_height, eax
+	shr rax, 32	
+	mov room_width, eax			
 	
 	invoke SetConsoleCenterScreen,HWND_TOP
 	.if eax == 0	
 		SHOW_ERROR "SetConsoleCenterScreen"	
 		mov dwStatus, eax
-	.endif	
+	.endif			
 	
 	invoke GetModuleHandle,NULL
 	mov HANDLE ptr hInstance, rax
@@ -42,17 +50,24 @@ LOCAL	YScreen:DWORD
 		mov dwStatus, eax
 	.endif
 	mov HANDLE ptr hWnd, rax
-		
+	
+	; Initilize device context
 	invoke GetDC,rax
 	.if rax == NULL
 		SHOW_ERROR "GetDC"	
 		mov dwStatus, eax
 	.endif
-	mov HDC ptr window, rax
+	mov qword ptr window, rax		
 	
-	; Create virual window
-	invoke CreateCompatibleDC, rax
-	mov HDC ptr screen,rax
+	; Set Window extesion in logical units
+	invoke SetWindowExtEx,rax,dword ptr room_width, \
+	dword ptr room_height, addr wndExtsz
+	invoke SetWindowExtEx,qword ptr window,dword ptr room_width, \
+	dword ptr room_height, addr wndExtsz
+	
+	; Create virual screen
+	invoke CreateCompatibleDC,qword ptr window
+	mov HDC ptr screen, rax
 	
 	invoke CreateCompatibleBitmap,qword ptr window,XScreen,YScreen
 	.if rax == NULL
@@ -63,11 +78,13 @@ LOCAL	YScreen:DWORD
 	invoke SelectObject,qword ptr screen,rax
 	mov bmpOld, rax
 	
-	invoke cimg_load_bmp,qword ptr hInstance,IDI_BACKGROUND
+	; Load resources
+	invoke cimg_load_bmp,qword ptr hInstance,IDI_BACKGROUND, \
+	dword ptr room_width,dword ptr room_height
 	mov hBackground, rax
 	.if rax == 0
 		mov dwStatus, 0
-	.endif		
+	.endif
 	
 	mov eax, dwStatus
 	ret

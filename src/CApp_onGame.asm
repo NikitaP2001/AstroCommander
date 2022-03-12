@@ -41,7 +41,7 @@ game_on_render proc
 	0,0,dword ptr room_width,dword ptr room_height
 	
 	invoke BitBlt,qword ptr window,0,0,dword ptr room_width, \
-	dword ptr room_height,qword ptr screen,0,0,SRCCOPY
+	dword ptr room_height,qword ptr screen,0,0,SRCCOPY	
 
 	leave
 	ret

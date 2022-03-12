@@ -56,14 +56,20 @@ LOCAL dwStatus:DWORD
 CApp_onExecute endp
 
 ; Bitmap image manipulation procs
-cimg_load_bmp proc hInst:QWORD, idBmp:DWORD
+cimg_load_bmp proc hInst:QWORD, idBmp:DWORD, img_w:DWORD, img_h:DWORD
+LOCAL hBmp:HANDLE
 	sub rsp, 28h
 	and rsp, -10h
+	mov img_w, r8d
+	mov img_h, r9d
 	
 	invoke LoadBitmap,rcx,edx
 	.if rax == NULL
 		SHOW_ERROR "LoadBitmap"			
 	.endif
+	mov hBmp, rax
+	
+	invoke CopyImage,rax,IMAGE_BITMAP,img_w,img_h,LR_COPYDELETEORG
 	
 @end:	
 
@@ -87,9 +93,9 @@ LOCAL hMemDC:HDC
 	invoke SelectObject,rax,hBmp
 	mov hOldBmp, rax
 	
-	invoke StretchBlt,hScreen,x,y,w,h,hMemDC,0,0,640,480,SRCCOPY
+	invoke BitBlt,hScreen,x,y,w,h,hMemDC,0,0,SRCCOPY
 	.if rax == NULL
-		SHOW_ERROR "StretchBlt"			
+		SHOW_ERROR "BitBlt"			
 	.endif
 	
 	invoke SelectObject,hMemDC,hOldBmp
